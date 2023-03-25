@@ -11,7 +11,7 @@ void Painter::setColor(SDL_Color color)
     // TODO: set the color value for the Painter and set Render Draw Color
 
     this->color = color;
-    SDL_SetRenderDrawColor(this->renderer, color.r, color.g, color.b, 0);
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 0);
 }
 
 
@@ -53,9 +53,9 @@ void Painter::jumpBackward(int numPixel)
 void Painter::turnLeft(double degree)
 {
     // TODO: rotate left the painter
-    double ang = this->angle + degree;
-	if(ang>360) ang-=360;
-	setAngle(ang);
+    angle += degree;
+    if ( angle > 0 ) angle = angle - floor(angle / 360) * 360;
+    else angle = angle - ceil(angle / 360) * 360;
 }
 
 
@@ -68,7 +68,9 @@ void Painter::turnLeft(double degree)
 void Painter::turnRight(double degree)
 {
     // TODO: rotate right the painter
-    turnLeft(-degree);
+    angle -= degree;
+    if (angle > 0) angle = angle - floor (angle / 360) * 360;
+    else angle = angle - ceil(angle / 360) * 360;
 }
 
 /***
