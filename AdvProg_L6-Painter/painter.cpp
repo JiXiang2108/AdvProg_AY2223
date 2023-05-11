@@ -9,9 +9,7 @@
 void Painter::setColor(SDL_Color color)
 {
     // TODO: set the color value for the Painter and set Render Draw Color
-
-    this->color = color;
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 0);
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 }
 
 
@@ -54,8 +52,7 @@ void Painter::turnLeft(double degree)
 {
     // TODO: rotate left the painter
     angle += degree;
-    if ( angle > 0 ) angle = angle - floor(angle / 360) * 360;
-    else angle = angle - ceil(angle / 360) * 360;
+    if(angle >= 360) angle -= 360;
 }
 
 
@@ -68,9 +65,7 @@ void Painter::turnLeft(double degree)
 void Painter::turnRight(double degree)
 {
     // TODO: rotate right the painter
-    angle -= degree;
-    if (angle > 0) angle = angle - floor (angle / 360) * 360;
-    else angle = angle - ceil(angle / 360) * 360;
+    turnLeft(-degree);
 }
 
 /***
